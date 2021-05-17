@@ -1,0 +1,75 @@
+<!--
+  Copyright Seiko Epson Corporation.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/html" data-help-name="status-monitor">
+  <p>Collects and outputs various data related to the state of Epson's robot controller connected via the local network and the robot connected to the controller. This can be used to build IoT applications for monitoring the status of Epson robots.</p>
+  <h3>Input</h3>
+  <p>You can start/stop using an input port. If the node operation start setting is set to "wait for true" in edit dialog, a node will not start collecting data or output motion if not using this function.</p>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">Boolean</span></dt>
+    <dd>When <code>true</code> is input, connect/login the robot controller and start collecting data and output motion.</dd>
+    <dd>When <code>false</code> is input, stop collecting data and output motion and disconnect from the robot controller.</dd>
+  </dl>
+  <h3>Output</h3>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">Object</span></dt>
+    <dd>This is an object consisting of various data collected from robot controllers and robots. If the controller firmware is older than the recommended environment, the following information <code>(*)</code> cannot be acquired and an empty string or an empty object is output.</dd>
+    <ul>
+      <li><code>connected</code> - Whether be connected or disconnected to a controller</li>
+      <li><code>loggedIn</code> - Whether login a controller</li>
+      <li><code>lastCommand</code> - Last command that is sent to a controller from node</li>
+      <li><code>lastResponse</code> - Last response received from a controller</li>
+      <li><code>controller</code> - Object that stores controller information
+        <ul>
+          <li><code>name</code> - Controller name</li>
+          <li><code>model</code> - Model name</li>
+          <li><code>serial</code> - Serial No</li>
+          <li><code>firmware(*)</code> - Firmware version</li>
+          <li><code>network</code> - Network information</li>
+          <li><code>preferences(*)</code> - Preferences information of a controller</li>
+          <li><code>health(*)</code> - Consumable part (backup battery) information of a controller</li>
+          <li><code>project(*)</code> - Project information</li>
+          <li><code>controlledBy(*)</code> - Device controls a controller</li>
+          <li><code>status</code> - Various data related to controller status</li>
+        </ul>
+      </li>
+      <li><code>robots</code> - This is the information of the robot connected to the controller. There is an array of object contains the following properties for each robot.<ul>
+          <li><code>number</code> - Robot number</li>
+          <li><code>name(*)</code> - Robot number</li>
+          <li><code>type</code> - Robot type</li>
+          <li><code>model</code> - Robot model</li>
+          <li><code>series</code> - Series name</li>
+          <li><code>serial(*)</code> - Serial number</li>
+          <li><code>hofs(*)</code> - Joint origin offset</li>
+          <li><code>warnings(*)</code> - Warning for parts</li>
+          <li><code>health(*)</code> - Parts consumption information</li>
+          <li><code>status(*)</code> - Information related to motor status</li>
+        </ul>
+      </li>
+    </ul>
+  </dl>
+  <h3>Details</h3>
+  <p>This node acquires various data by communicating to the controller's "Remote Ethernet" function. Take note the followings to use nodes.</p>
+  <ul>
+    <li>Controller configuration is required. In EPSON RC+ menu -[Setup]-[System Configuration]-[Controller]-[Remote Control]-[Ethernet] connected to the target controller, enable "Use only for monitoring". Do not set the control device to "Remote Ethernet".</li>
+    <li>Depending on controller firmware versions or connected robots, some information cannot be obtained or output.</li>
+    <li>If there are other client terminals that use Remote Ethernet communication for the controller, they cannot be used at the same time.</li>
+  </ul>
+  <h3>Reference</h3>
+  <ul>
+    <li>EPSON RC+ 7.0 User's Guide</li>
+  </ul>
+</script>

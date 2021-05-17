@@ -1,0 +1,76 @@
+<!--
+  Copyright Seiko Epson Corporation.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/html" data-help-name="status-monitor">
+  <p>收集並輸出各種資料，包含透過區域網路連接的愛普生機器人控制器，和連接到控制器的機械手臂狀態。構建IoT應用軟體用以監控愛普生機器人的狀態。</p>
+  <h3>輸入</h3>
+  <p>可以使用輸入埠開始和停止note的作業。如果編輯對話框將note的作業啟動設定為"等待直到輸入true"，則必須使用此功能，否則note無法開始收集和輸出資料的作業。</p>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">Boolean</span></dt>
+    <dd>如果輸入<code>true</code>，則連接並登入機器人控制器，開始資料收集和輸出作業。</dd>
+    <dd>如果輸入<code>false</code>，則停止資料收集和輸出作業，切換與機器人控制器的連接。</dd>
+  </dl>
+  <h3>輸出</h3>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">物件</span></dt>
+    <dd>由機器人控制器和機械手臂收集的各種資訊組成的物件。如果控制器的韌體版本比建議的版本舊，則無法獲得以下<code>(*)</code>資訊，并且將輸出空字元和空物件。</dd>
+    <ul>
+      <li><code>connected</code> - 是否連接控制器</li>
+      <li><code>loggedIn</code> - 是否登入控制器</li>
+      <li><code>lastCommand</code> - 從note傳送到控制器的最後一個命令</li>
+      <li><code>lastResponse</code> - 從控制器收到的最新回應</li>
+      <li><code>controller</code> - 包含控制器資訊的物件
+        <ul>
+          <li><code>name</code> - 控制器名稱</li>
+          <li><code>model</code> - 機型名稱</li>
+          <li><code>serial</code> - 序列號碼</li>
+          <li><code>firmware(*)</code> - 韌體版本</li>
+          <li><code>network</code> - 網路資訊</li>
+          <li><code>preferences(*)</code> - 控制器的偏好設定資訊</li>
+          <li><code>health(*)</code> - 控制器的消耗部件 (備用電池組)的資訊</li>
+          <li><code>project(*)</code> - 專案資訊</li>
+          <li><code>controlledBy(*)</code> - 控制設備</li>
+          <li><code>status</code> - 控制器狀態的各種資訊</li>
+        </ul>
+      </li>
+      <li><code>robots</code> - 連接控制器的機械手臂資訊。顯示每個機器人的物件陣列，包含以下屬性。
+        <ul>
+          <li><code>number</code> - 機器人編號</li>
+          <li><code>name(*)</code> - 機器人名稱</li>
+          <li><code>type</code> - 機器人類型</li>
+          <li><code>model</code> - 機型名稱</li>
+          <li><code>series</code> - 機型編號</li>
+          <li><code>serial(*)</code> - 序列號碼</li>
+          <li><code>hofs(*)</code> - 關節原點偏移</li>
+          <li><code>warnings(*)</code> - 零件警告資訊</li>
+          <li><code>health(*)</code> - 零件耗用資訊</li>
+          <li><code>status(*)</code> - 主要有關馬達的資訊</li>
+        </ul>
+      </li>
+    </ul>
+  </dl>
+  <h3>詳細</h3>
+  <p>此note透過與控制器"遠端乙太網"功能通訊，收集各種資料。使用時請注意以下事項。</p>
+  <ul>
+    <li>需要設定控制器。連接目標控制器，然後選擇EPSON RC+菜單 - [設置] - [系統配置] - [控制器] - [遠程控制] - [乙太網] 熒幕中的"僅用於監視"核取方塊。不要將控制器的控制設備設定爲"遠端乙太網"。</li>
+    <li>根據控制器的韌體版本和連接機器人的類型，某些資訊可能無法獲取並輸出。</li>
+    <li>如果還有其他客戶終端使用遠端乙太網和控制器通訊，則不能同時使用。</li>
+  </ul>
+  <h3>參閱</h3>
+  <ul>
+    <li>EPSON RC+ 7.0 使用指南</li>
+  </ul>
+</script>

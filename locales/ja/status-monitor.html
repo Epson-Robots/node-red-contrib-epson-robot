@@ -1,0 +1,76 @@
+<!--
+  Copyright Seiko Epson Corporation.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/html" data-help-name="status-monitor">
+  <p>ローカルネットワークで接続されたエプソンのロボットコントローラーと、コントローラーに接続されているロボットの状態に関する様々なデータを収集して出力します。エプソンロボットの状態監視を目的としたIoTアプリケーションの構築に利用できます。</p>
+  <h3>入力</h3>
+  <p>入力ポートを使ってノードの動作を開始/停止できます。編集ダイアログでノードの動作開始設定を"trueが入力されるまで待つ"にしている場合は、この機能を使わないとノードはデータ収集や出力動作を開始しません。</p>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">ブーリアン</span></dt>
+    <dd><code>true</code>が入力されると、ロボットコントローラーに接続/ログインし、データ収集や出力動作を開始します。</dd>
+    <dd><code>false</code>が入力されると、データ収集や出力動作を停止し、ロボットコントローラーとの接続を切ります。</dd>
+  </dl>
+  <h3>出力</h3>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">オブジェクト</span></dt>
+    <dd>ロボットコントローラーとロボットから収集した様々なデータからなるオブジェクトです。コントローラーのファームウェアが推奨環境よりも古い場合、以下の<code>(*)</code>の情報は取得できず、空文字や空オブジェクトが出力されます。</dd>
+    <ul>
+      <li><code>connected</code> - コントローラーと接続しているか否か</li>
+      <li><code>loggedIn</code> - コントローラーにログインしているか否か</li>
+      <li><code>lastCommand</code> - ノードから最後にコントローラーに送信したコマンド</li>
+      <li><code>lastResponse</code> - コントローラーから最後に受信したレスポンス</li>
+      <li><code>controller</code> - コントローラーの情報を格納したオブジェクト
+        <ul>
+          <li><code>name</code> - コントローラー名</li>
+          <li><code>model</code> - 機種名</li>
+          <li><code>serial</code> - シリアル番号</li>
+          <li><code>firmware(*)</code> - ファームウェアバージョン</li>
+          <li><code>network</code> - ネットワーク情報</li>
+          <li><code>preferences(*)</code> - コントローラーの環境設定情報</li>
+          <li><code>health(*)</code> - コントローラーの消耗部品 (バックアップバッテリー)の情報</li>
+          <li><code>project(*)</code> - プロジェクト情報</li>
+          <li><code>controlledBy(*)</code> - コントローラーを制御しているデバイス</li>
+          <li><code>status</code> - コントローラーの状態に関する様々な情報</li>
+        </ul>
+      </li>
+      <li><code>robots</code> - コントローラーに接続されたロボットの情報。ロボット1台ごとに、以下のプロパティを含むオブジェクトの配列になります。
+        <ul>
+          <li><code>number</code> - ロボット番号</li>
+          <li><code>name(*)</code> - ロボット名</li>
+          <li><code>type</code> - ロボットのタイプ</li>
+          <li><code>model</code> - 機種名</li>
+          <li><code>series</code> - シリーズ名</li>
+          <li><code>serial(*)</code> - シリアル番号</li>
+          <li><code>hofs(*)</code> - 関節原点補正値</li>
+          <li><code>warnings(*)</code> - 部品警告情報</li>
+          <li><code>health(*)</code> - 部品消耗情報</li>
+          <li><code>status(*)</code> - 主にモーターの状態に関する情報</li>
+        </ul>
+      </li>
+    </ul>
+  </dl>
+  <h3>詳細</h3>
+  <p>本ノードは、コントローラーの"リモートイーサーネット"機能との通信により各種データを取得します。利用にあたっては、以下に注意してください。</p>
+  <ul>
+    <li>コントローラーの設定が必要です。対象のコントローラーを接続した状態のEPSON RC+メニュー - [セットアップ] - [システム設定] - [コントローラー] - [リモート] - [イーサネット] の画面で、"状態モニター用として使用"を有効にしてください。なお、コントローラーを制御するコントロールデバイスを、"Remote Ethernet"に設定しないでください。</li>
+    <li>コントローラーのファームウェアバージョンや接続されたロボットの種類によって、取得や出力ができない情報があります。</li>
+    <li>コントローラーに対して他にリモートイーサーネット通信を使用するクライアント端末が存在する場合、同時に使用できません。</li>
+  </ul>
+  <h3>参照</h3>
+  <ul>
+    <li>EPSON RC+ 7.0 ユーザーズガイド</li>
+  </ul>
+</script>

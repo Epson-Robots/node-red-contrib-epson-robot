@@ -1,0 +1,120 @@
+<!--
+  Copyright Seiko Epson Corporation.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/javascript">
+  RED.nodes.registerType('status-monitor', {
+    category: 'Epson Robots',
+    defaults: {
+      name: { value: '' },
+      host: { value: '', required: true },
+      port: { value: 5000, required: true, validate: RED.validators.regex(/^()([1-9]|[1-5]?[0-9]{2,4}|6[1-4][0-9]{3}|65[1-4][0-9]{2}|655[1-2][0-9]|6553[1-5])$/) },
+      terminator: { value: 'CRLF', required: true },
+      locale: { value: 'en', required: true },
+      interval: { value: '1', required: true },
+      startOfOperation: { value: 'active', required: true}
+    },
+    credentials: {
+      password: { type: 'password' }
+    },
+    inputs: 1,
+    outputs: 1,
+    color: '#C0DEED',
+    label: function() {
+      return this.name || `${this.host}:${this.port}`;
+    },
+    icon: 'epson-robot.svg'
+  })
+</script>
+
+<script type="text/html" data-template-name="status-monitor">
+  <div class="form-row">
+    <label for="node-input-name">
+      <i class="fa fa-tag"></i>
+      <span data-i18n="statusMonitor.name"></span>
+    </label>
+    <input type="text" id="node-input-name" data-i18n="[placeholder]statusMonitor.name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-host">
+      <i class="fa fa-server"></i>
+      <span data-i18n="statusMonitor.host"></span>
+    </label>
+    <input type="text" id="node-input-host" value="localhost" data-i18n="[placeholder]statusMonitor.hostOrIp">
+  </div>
+  <div class="form-row">
+    <label for="node-input-port">
+      <i class="fa fa-plug"></i>
+      <span data-i18n="statusMonitor.portNumber"></span>
+    </label>
+    <input type="text" id="node-input-port">
+  </div>
+  <div class="form-row">
+    <label for="node-input-terminator">
+      <i class="fa fa-level-down fa-rotate-90"></i>
+      <span data-i18n="statusMonitor.terminator"></span>
+    </label>
+    <select id="node-input-terminator" name="terminator">
+      <option value="CR">CR</option>
+      <option value="LF">LF</option>
+      <option value="CRLF" selected>CRLF</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-password">
+      <i class="fa fa-lock"></i>
+      <span data-i18n="statusMonitor.password"></span>
+    </label>
+    <input type="password" id="node-input-password">
+  </div>
+  <div class="form-row">
+    <label for="node-input-locale">
+      <i class="fa fa-language"></i>
+      <span data-i18n="statusMonitor.language"></span>
+    </label>
+    <select id="node-input-locale" name="locale">
+      <option value="de">Deutsch</option>
+      <option value="en" selected>English</option>
+      <option value="fr">Français</option>
+      <option value="ja">日本語</option>
+      <option value="zh-CN">简体中文</option>
+      <option value="zh-TW">繁體中文</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-interval">
+      <i class="fa fa-repeat"></i>
+      <span data-i18n="statusMonitor.outputInterval"></span>
+    </label>
+    <select id="node-input-interval">
+      <option value="1" selected>1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <span data-i18n="statusMonitor.seconds"></span>
+  </div>
+  <div class="form-row">
+    <label for="node-input-startOfOperation">
+      <i class="fa fa-play"></i>
+      <span data-i18n="statusMonitor.startOfOperation"></span>
+    </label>
+    <select id="node-input-startOfOperation" name="startOfOperation" style="width:70%;">
+      <option value="active" selected data-i18n="statusMonitor.connectAtDeploy"></option>
+      <option value="idle" data-i18n="statusMonitor.waitInputOfTrue"></option>
+    </select>
+  </div>
+</script>

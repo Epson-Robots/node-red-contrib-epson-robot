@@ -1,0 +1,24 @@
+{
+  "statusMonitor": {
+    "name": "名前",
+    "host": "ホスト",
+    "hostOrIp": "コントローラーのIPアドレスまたはホスト名",
+    "portNumber": "ポート番号",
+    "terminator": "ターミネーター",
+    "password": "パスワード",
+    "language": "言語設定",
+    "outputInterval": "出力時間間隔",
+    "seconds": "秒",
+    "startOfOperation": "動作開始",
+    "connectAtDeploy": "デプロイ時に自動的に接続する",
+    "waitInputOfTrue": "trueが入力されるまで待つ",
+    "status": {
+      "connecting": "接続中",
+      "connected": "接続済み",
+      "connectedWithPhase": "接続済み '__phase__'",
+      "reconnectAfterSeconds": "__time__ 秒後に再接続します",
+      "suspended": "一時停止中",
+      "disconnected": "未接続"
+    }
+  }
+}

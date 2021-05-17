@@ -1,0 +1,24 @@
+{
+  "statusMonitor": {
+    "name": "Nom",
+    "host": "Hôte",
+    "hostOrIp": "Adresse IP du contrôleur ou nom d'hôte",
+    "portNumber": "Num. port",
+    "terminator": "Terminateur",
+    "password": "Mot de passe",
+    "language": "Langue",
+    "outputInterval": "Intervalle de sortie",
+    "seconds": "secondes",
+    "startOfOperation": "Début des opération",
+    "connectAtDeploy": "Connectez-vous automatiquement au déploiement",
+    "waitInputOfTrue": "Attendez l’entrée de 'true'",
+    "status": {
+      "connecting": "connecte",
+      "connected": "connecté",
+      "connectedWithPhase": "connecté '__phase__'",
+      "reconnectAfterSeconds": "reconnecter après __time__ secondes",
+      "suspended": "suspendu",
+      "disconnected": "déconnecté"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "@epson-robots/node-red-contrib-epson-robot",
+  "version": "0.0.1",
+  "description": "A Node-RED node for Epson's SCARA and 6-axis type robots",
+  "homepage": "https://global.epson.com/products/robots/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Epson-Robots/node-red-contrib-epson-robot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Epson-Robots/node-red-contrib-epson-robot/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "format": "prettier *.js"
+  },
+  "keywords": [
+    "node-red",
+    "epson",
+    "robot",
+    "robotics",
+    "iot"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
+  "author": "Seiko Epson Corporation",
+  "contributors": [
+    {
+      "name": "Norihiko YAMADA"
+    },
+    {
+      "name": "Sawako MIZOGUCHI"
+    }
+  ],
+  "node-red": {
+    "nodes": {
+      "status-monitor": "status-monitor.js"
+    }
+  },
+  "dependencies": {
+    "iconv-lite": "^0.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "prettier": "^2.2.1"
+  }
+}

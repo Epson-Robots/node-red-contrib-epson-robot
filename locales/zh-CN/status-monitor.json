@@ -1,0 +1,24 @@
+{
+  "statusMonitor": {
+    "name": "名称",
+    "host": "主机",
+    "hostOrIp": "控制器的IP地址或主机名称",
+    "portNumber": "端口编号",
+    "terminator": "终端",
+    "password": "密码",
+    "language": "语言设置",
+    "outputInterval": "输出时间间隔",
+    "seconds": "秒",
+    "startOfOperation": "动作开始",
+    "connectAtDeploy": "调用时自动连接",
+    "waitInputOfTrue": "等待输入true",
+    "status": {
+      "connecting": "连接中",
+      "connected": "连接成功",
+      "connectedWithPhase": "连接成功 '__phase__'",
+      "reconnectAfterSeconds": "__time__ 秒后重新连接",
+      "suspended": "暂停中",
+      "disconnected": "未连接"
+    }
+  }
+}

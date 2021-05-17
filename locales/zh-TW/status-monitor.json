@@ -1,0 +1,24 @@
+{
+  "statusMonitor": {
+    "name": "名稱",
+    "host": "主機",
+    "hostOrIp": "控制器的IP位址或主機名稱",
+    "portNumber": "埠號",
+    "terminator": "終止器",
+    "password": "密碼",
+    "language": "語言設定",
+    "outputInterval": "輸出時間間隔",
+    "seconds": "秒",
+    "startOfOperation": "開始作業",
+    "connectAtDeploy": "調度時自動連接",
+    "waitInputOfTrue": "等待直到輸入true",
+    "status": {
+      "connecting": "連接中",
+      "connected": "已連接",
+      "connectedWithPhase": "已連接 '__phase__'",
+      "reconnectAfterSeconds": "__time__ 秒後重新連接",
+      "suspended": "暫停中",
+      "disconnected": "未連接"
+    }
+  }
+}

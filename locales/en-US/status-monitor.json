@@ -1,0 +1,24 @@
+{
+  "statusMonitor": {
+    "name": "Name",
+    "host": "Host",
+    "hostOrIp": "Controller IP address or hostname",
+    "portNumber": "Port",
+    "terminator": "Terminator",
+    "password": "Password",
+    "language": "Language",
+    "outputInterval": "Output time interval",
+    "seconds": "seconds",
+    "startOfOperation": "Start of operation",
+    "connectAtDeploy": "connect automatically on deployment",
+    "waitInputOfTrue": "wait for input of true",
+    "status": {
+      "connecting": "connecting",
+      "connected": "connected",
+      "connectedWithPhase": "connected '__phase__'",
+      "reconnectAfterSeconds": "reconnect after __time__ seconds",
+      "suspended": "suspended",
+      "disconnected": "disconnected"
+    }
+  }
+}

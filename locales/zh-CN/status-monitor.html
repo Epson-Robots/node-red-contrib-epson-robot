@@ -1,0 +1,76 @@
+<!--
+  Copyright Seiko Epson Corporation.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/html" data-help-name="status-monitor">
+  <p>此功能可用于收集并输出各项数据，反映连接到本地网络的爱普生机器人控制器的状态，以及连接控制器的机械手状态。通过构建IoT应用程序，监控爱普生机器人的状态。</p>
+  <h3>输入</h3>
+  <p>用户可以使用输入端口启动或终止note的运行。如果在编辑窗口中，将note开始运行的条件设置为"等待输入true"时，则必须使用此功能，否则note无法开始收集并输出数据的操作。</p>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">Boolean</span></dt>
+    <dd>当输入<code>true</code>时，将连接并登录到机器人控制器，开始收集和输出各项数据。</dd>
+    <dd>当输入<code>false</code>时，将停止收集和输出数据，并断开与机器人控制器的连接。</dd>
+  </dl>
+  <h3>输出</h3>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">对象</span></dt>
+    <dd>由收集到的机器人控制器和机械手数据所组成的对象。若控制器固件版本低于推荐版本，则无法获取以下<code>(*)</code>信息，并输出空白字符和空白对象。</dd>
+    <ul>
+      <li><code>connected</code> - 是否已连接到控制器</li>
+      <li><code>loggedIn</code> - 是否已登录到控制器</li>
+      <li><code>lastCommand</code> - note传输到控制器的最后一条命令</li>
+      <li><code>lastResponse</code> - 从控制器接收的最新响应</li>
+      <li><code>controller</code> - 存储控制器信息的对象
+        <ul>
+          <li><code>name</code> - 控制器名称</li>
+          <li><code>model</code> - 机型名称</li>
+          <li><code>serial</code> - 序列号</li>
+          <li><code>firmware(*)</code> - 固件版本</li>
+          <li><code>network</code> - 网络状态</li>
+          <li><code>preferences(*)</code> - 控制器首选项信息</li>
+          <li><code>health(*)</code> - 控制器消耗零件 (备份电池)信息</li>
+          <li><code>project(*)</code> - 项目信息</li>
+          <li><code>controlledBy(*)</code> - 控制设备</li>
+          <li><code>status</code> - 控制器状态的各项信息</li>
+        </ul>
+      </li>
+      <li><code>robots</code> - 连接到控制器的机械手信息。是每台机械手的对象数组，并包含以下属性。
+        <ul>
+          <li><code>number</code> - 机器人编号</li>
+          <li><code>name(*)</code> - 机器人名称</li>
+          <li><code>type</code> - 机器人类型</li>
+          <li><code>model</code> - 机型名称</li>
+          <li><code>series</code> - 系列名称</li>
+          <li><code>serial(*)</code> - 序列号</li>
+          <li><code>hofs(*)</code> - 关节原点校正值</li>
+          <li><code>warnings(*)</code> - 零件警告信息</li>
+          <li><code>health(*)</code> - 消耗零件信息</li>
+          <li><code>status(*)</code> - 主要有关电机状态的信息</li>
+        </ul>
+      </li>
+    </ul>
+  </dl>
+  <h3>详情</h3>
+  <p>本note通过控制器的"远程以太网"通信，获取各项数据。使用时请注意下列事项。</p>
+  <ul>
+    <li>需设置控制器属性。连接机器人控制器，然后在EPSON RC+菜单中选择[设置] - [设置控制器] - [控制器] - [远程控制] - [以太网]，勾选"只用于监控"选项。请勿将控制器的控制设备设置为"远程以太网"。</li>
+    <li>由于控制器固件版本和所连接机器人的限制，部分数据可能无法获取并输出。</li>
+    <li>如果有其他用户端在使用远程以太网与控制器通讯时，则无法同时使用。</li>
+  </ul>
+  <h3>参照</h3>
+  <ul>
+    <li>EPSON RC+ 7.0 用户指南</li>
+  </ul>
+</script>
