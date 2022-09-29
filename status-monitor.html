@@ -18,8 +18,8 @@
   RED.nodes.registerType('status-monitor', {
     category: 'Epson Robots',
     defaults: {
-      name: { value: '' },
-      host: { value: '', required: true },
+      name: { value: '', validate: RED.validators.regex(/^.{0,128}$/) },
+      host: { value: '', required: true, validate: RED.validators.regex(/^([ -~]{1,255})$/) },
       port: { value: 5000, required: true, validate: RED.validators.regex(/^()([1-9]|[1-5]?[0-9]{2,4}|6[1-4][0-9]{3}|65[1-4][0-9]{2}|655[1-2][0-9]|6553[1-5])$/) },
       terminator: { value: 'CRLF', required: true },
       locale: { value: 'en', required: true },
@@ -27,7 +27,7 @@
       startOfOperation: { value: 'active', required: true}
     },
     credentials: {
-      password: { type: 'password' }
+      password: { type: 'password', validate: RED.validators.regex(/^([ -~]{0,16})$/) }
     },
     inputs: 1,
     outputs: 1,

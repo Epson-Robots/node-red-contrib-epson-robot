@@ -180,7 +180,8 @@ class EpsonRCState extends EventEmitter {
       'GetHealthCont',
       'GetHealthRB',
       'GetSubnetMask',
-      'GetDefaultGateway'
+      'GetDefaultGateway',
+      'GetContDev'
     ];
 
     return new Promise((resolve, reject) => {
@@ -484,6 +485,10 @@ class EpsonRCState extends EventEmitter {
             return 'G6';
           case /^G20/.test(model):
             return 'G20';
+          case /^GX4/.test(model):
+            return 'GX4';
+          case /^GX8/.test(model):
+            return 'GX8';
           case /^LS3-\d{1}/.test(model):
             return 'LS3';
           case /^LS3-B/.test(model):
@@ -510,8 +515,12 @@ class EpsonRCState extends EventEmitter {
             return 'RS4';
           case /^S5/.test(model):
             return 'S5';
+          case /^T3-B/.test(model): // Check prior to T3
+            return 'T3-B';
           case /^T3/.test(model):
             return 'T3';
+          case /^T6-B/.test(model): // Check prior to T6
+            return 'T6-B';
           case /^T6/.test(model):
             return 'T6';
           case /^VT6/.test(model):

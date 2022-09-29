@@ -14,7 +14,7 @@ Either use [Menu]-[Manage pallet] option in Node-RED editor or execute the follo
 
         npm i @epson-robots/node-red-contrib-epson-robot
 
-Execution environment of this node is Node-RED v1.0 or later.
+Execution environment of this node is Node-RED v1.3 or later.
 
 ## Usage
 
@@ -36,7 +36,7 @@ Follow the steps below to enable "Remote Ethernet" function for information acqu
     The acquisition of information on component wear by this node is executed once immediately after connection. Subsequent re-acquisitions will be every 24 hours. It is not affected by the output time interval configured in the edit dialog of the node on the editor.
 1. Open [Controller]-[Remote Control]-[Ethernet].
 1. Select the [Use only for monitoring] check box.
-    * ![Use only for monitoring](./img/RC+_SystemConfiguration_RemoteEthernet.png)
+    * ![Use only for monitoring](./resources/RC+_SystemConfiguration_RemoteEthernet.png)
 1. Check the port and terminator (change if necessary). Set password if required.
     * **Caution**: The timeout value (default: 60.00 seconds) should be greater than the output time interval set in the edit dialog of the node on the editor.
 
@@ -62,7 +62,7 @@ This node operates on the following robot controllers and firmware versions. Thi
 #### Cautions
 
 * Depending on a controller and a connected robot, some information cannot be acquired.
-* In EPSON RC+ virtual controller, the information such as maintenance data and CPU load factor even in the above version or later.
+* In EPSON RC+ virtual controller, the information such as maintenance data and CPU load factor cannot be correctly acquired and output even in the above version or later.
 * The maximum continuous operation time of EPSON RC+ virtual controller is 60 minutes.
 
 ## Example

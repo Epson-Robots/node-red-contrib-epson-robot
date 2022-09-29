@@ -14,7 +14,7 @@
 
         npm i @epson-robots/node-red-contrib-epson-robot
 
-运行本node需要Node-RED v1.0以上版本。
+运行本node需要Node-RED v1.3以上版本。
 
 ## 使用方法
 
@@ -35,7 +35,7 @@ node输入/输出的相关规格，请参阅Node-RED编辑器中node的帮助文
     * **注意**: 本node会在建立连接后立即获得零件的消耗情况。然后每24小时重新获得一次。不会受到编辑器上node编辑对话框中设置的输出时间间隔的影响。
 1. 选择[控制器]-[远程控制]-[以太网]
 1. 勾选[只用于监控]选项
-    * ![只用于监控](./img/RC+_SystemConfiguration_RemoteEthernet_zh-CN.png)
+    * ![只用于监控](./resources/RC+_SystemConfiguration_RemoteEthernet_zh-CN.png)
 1. 检查TCP/IP地址和终端信息(必要时请修改) ，并根据需要设置连接密码
     * **注意**: 超时值 (默认：60.00秒)中设置的时间，应大于编辑器上node编辑对话框中设置的输出时间间隔。
 

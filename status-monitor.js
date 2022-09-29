@@ -415,6 +415,8 @@
       rc.socket.on('timeout', () => {
         node.error('Socket timeout');
         deleteTimer();
+        rc.socket.end();
+        rc.socket.destroy();
         rc.socket.emit('reconnect');
       });
     }
